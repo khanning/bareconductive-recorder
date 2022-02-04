@@ -1,0 +1,69 @@
+html, body {
+  height: 100%;
+  font-family: Arial, sans-serif;
+}
+
+#container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  justify-content: center;
+  align-items: center;
+}
+
+#title {
+  font-size: 1.5em;
+  padding-bottom: 20px;
+}
+
+#track-selector {
+  display: flex;
+  margin: 0 0 15px 0;
+}
+
+.selector {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid black;
+  text-align: center;
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+}
+
+.selector:hover {
+  background-color: #ecf0f1;
+}
+
+.selected {
+  background-color: #2ecc71 !important;
+}
+
+#player {
+  display: flex;
+  margin: 10px 0;
+}
+
+#buttons {
+  display: flex;
+  margin: 10px 0;
+}
+
+.button {
+  cursor: pointer;
+  width: 50px;
+  height: 50px;
+}
+
+#start {
+  background: url('assets/record.svg') no-repeat;
+  background-size: cover;
+}
+
+#download {
+  margin-top: 10px;
+  background: url('assets/download.svg') no-repeat;
+  background-size: cover;
+}

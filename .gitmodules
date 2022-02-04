@@ -1,0 +1,3 @@
+[submodule "web-audio-recorder-js"]
+	path = web-audio-recorder-js
+	url = https://github.com/higuma/web-audio-recorder-js
