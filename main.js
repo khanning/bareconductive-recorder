@@ -3,6 +3,7 @@ let player = null;
 let startButton = null;
 let stopButton = null;
 let downloadButton = null;
+let statusTag = null;
 
 let downloadLink = document.createElement('a');
 
@@ -21,6 +22,7 @@ async function start() {
   startButton = document.getElementById('start');
   // stopButton = document.getElementById('stop');
   downloadButton = document.getElementById('download');
+  statusTag = document.getElementById('status');
 
   startButton.onclick = startRecording;
   // stopButton.onclick = stopRecording;
@@ -52,11 +54,13 @@ async function start() {
     }
   });
   webAudioRecorder.onComplete = (recorder, blob) => {
-    console.log(blob);
     var reader = new FileReader();
     reader.onload = e => {
       currentBlobURI = e.target.result;
       player.src = e.target.result;
+      statusTag.className = '';
+      statusTag.innerHTML = '&nbsp;';
+      downloadButton.className = 'button ready';
     }
     reader.readAsDataURL(blob);
   }
@@ -64,10 +68,15 @@ async function start() {
 
 function startRecording() {
   if (recording) {
+    statusTag.className = 'status-processing';
+    statusTag.innerHTML = 'Processing';
     webAudioRecorder.finishRecording();
     startButton.style.backgroundImage = 'url("assets/record.svg")';
     recording = false;
   } else {
+    statusTag.className = 'status-recording';
+    statusTag.innerHTML = 'Recording';
+    downloadButton.className = 'button disabled';
     player.src = null;
     setTimeout(() => {
       webAudioRecorder.startRecording()
@@ -77,14 +86,12 @@ function startRecording() {
   }
 }
 
-function stopRecording() {
-}
-
 function paddedTrack() {
   return String(selectedTrack).padStart(2, '0');
 }
 
 function downloadRecording() {
+  if (!currentBlobURI) return;
   downloadLink.href = currentBlobURI;
   downloadLink.download = `TRACK0${paddedTrack()}.mp3`;
   downloadLink.click();

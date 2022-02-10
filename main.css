@@ -64,6 +64,22 @@ html, body {
 
 #download {
   margin-top: 10px;
-  background: url('assets/download.svg') no-repeat;
   background-size: cover;
+  filter: brightness(1.6);
+}
+
+.disabled {
+  background: linear-gradient(rgba(255,255,255,0.4), rgba(255,255,255,0.4)), url('assets/download.svg') no-repeat;
+}
+
+.ready {
+  background: url('assets/download.svg') no-repeat;
+}
+
+.status-recording {
+  color: red;
+}
+
+.status-processing {
+  color: green;
 }
