@@ -2,8 +2,10 @@ let trackSelector = null;
 let player = null;
 let startButton = null;
 let stopButton = null;
-let downloadButton = null;
+let  downloadButton = null;
+let statusContainer = null;
 let statusTag = null;
+let statusTicker = null;
 
 let downloadLink = document.createElement('a');
 
@@ -16,13 +18,18 @@ let recording = false;
 let selectedTrack = 0;
 let selectorDivs = [];
 
+let ticker = null;
+let startTime = 0;
+
 async function start() {
   trackSelector = document.getElementById('track-selector');
   player = document.getElementById('audio-player');
   startButton = document.getElementById('start');
   // stopButton = document.getElementById('stop');
   downloadButton = document.getElementById('download');
-  statusTag = document.getElementById('status');
+  statusContainer = document.getElementById('status');
+  statusTag = document.getElementById('status-label');
+  statusTicker = document.getElementById('status-counter');
 
   startButton.onclick = startRecording;
   // stopButton.onclick = stopRecording;
@@ -58,7 +65,7 @@ async function start() {
     reader.onload = e => {
       currentBlobURI = e.target.result;
       player.src = e.target.result;
-      statusTag.className = '';
+      statusContainer.className = '';
       statusTag.innerHTML = '&nbsp;';
       downloadButton.className = 'button ready';
     }
@@ -68,22 +75,38 @@ async function start() {
 
 function startRecording() {
   if (recording) {
-    statusTag.className = 'status-processing';
-    statusTag.innerHTML = 'Processing';
-    webAudioRecorder.finishRecording();
-    startButton.style.backgroundImage = 'url("assets/record.svg")';
-    recording = false;
+    stopRecording();
   } else {
-    statusTag.className = 'status-recording';
+    statusContainer.className = 'status-recording';
     statusTag.innerHTML = 'Recording';
+    startTime = Date.now();
+    statusTicker.innerHTML = '&nbsp;0.0s';
     downloadButton.className = 'button disabled';
     player.src = null;
     setTimeout(() => {
       webAudioRecorder.startRecording()
+      ticker = setInterval(() => {
+        let time = (Date.now() - startTime) / 1000;
+        statusTicker.innerHTML = `&nbsp;${time.toFixed(1)}s`;
+      }, 50);
+      setTimeout(stopRecording, 30000);
     }, 150);
     startButton.style.backgroundImage = 'url("assets/stop.svg")';
     recording = true;
   }
+}
+
+function stopRecording() {
+  statusContainer.className = 'status-processing';
+  statusTag.innerHTML = 'Processing';
+  statusTicker.innerHTML = '';
+  if (ticker) {
+    clearInterval(ticker);
+    ticker = null;
+  }
+  webAudioRecorder.finishRecording();
+  startButton.style.backgroundImage = 'url("assets/record.svg")';
+  recording = false;
 }
 
 function paddedTrack() {
