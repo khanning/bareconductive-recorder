@@ -1,7 +1,6 @@
 html, body {
   /* height: 100%; */
   font-family: Arial, sans-serif;
-  padding-top: 50px;
 }
 
 #container {
@@ -13,9 +12,62 @@ html, body {
   align-items: center;
 }
 
-#title {
+.steps {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 10px 0;
+}
+
+.step-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-right: 15px;
+}
+
+.step {
   font-size: 1.5em;
-  padding-bottom: 20px;
+  width: 50px;
+  padding-left: 20px;
+}
+
+.step-two-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.step-one {
+  background-color: #fcee9e;
+}
+
+.step-two {
+  background-color: #8bd2ec;
+}
+
+.step-three {
+  background-color: #92cea8;
+}
+
+.tool {
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid #c4c4c4;
+  border-radius: 20px;
+  margin-top: 40px;
+  overflow: hidden;
+}
+
+#title {
+  width: 100%;
+  font-size: 1.5em;
+  padding: 20px 0;
+  background-color: #d1b7dd;
+  text-align: center;
 }
 
 #track-selector {
@@ -32,6 +84,7 @@ html, body {
   width: 25px;
   height: 25px;
   cursor: pointer;
+  background-color: white;
 }
 
 .selector:hover {
@@ -44,7 +97,6 @@ html, body {
 
 #player {
   display: flex;
-  margin: 10px 0 30px 0;
 }
 
 #buttons {
@@ -69,8 +121,14 @@ html, body {
   filter: brightness(1.6);
 }
 
+.download-icon {
+  cursor: pointer;
+  width: 50px;
+}
+
 .disabled {
-  background: linear-gradient(rgba(255,255,255,0.4), rgba(255,255,255,0.4)), url('assets/download.svg') no-repeat;
+  filter: opacity(0.2);
+  cursor: default;
 }
 
 .ready {
@@ -79,6 +137,7 @@ html, body {
 
 #status {
   display: flex;
+  margin: 5px 0;
 }
 
 .status-recording {
@@ -87,4 +146,23 @@ html, body {
 
 .status-processing {
   color: green;
+}
+
+.instructions {
+  border: 1px solid #c4c4c4;
+  border-radius: 20px;
+  margin-top: 40px;
+  width: 500px;
+}
+
+.instructions-title {
+ font-size: 1.5em;
+ width: 95%;
+ margin: 5px auto;
+ text-align: center;
+ border-bottom: 1px solid #c4c4c4;
+}
+
+.tips {
+  margin: 0 20px;
 }

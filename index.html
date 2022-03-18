@@ -6,18 +6,49 @@
 </head>
 <body>
   <div id="container">
-    <div id="title">Bare Conductive Recorder</div>
-    <div id="status">
-      <div id="status-label">&nbsp;</div>
-      <div id="status-counter"></div>
+    <div class="tool">
+      <div id="title">Bare Conductive Recorder</div>
+      <div class="step-one steps">
+        <div class="step">1.</div>
+        <div class="step-content step-one-content">
+          <div id="player">
+            <audio id="audio-player" controls></audio>
+            <div id="start" class="button" title="start/stop recording"></div>
+          </div>
+          <div id="status">
+            <div id="status-label">&nbsp;</div>
+            <div id="status-counter"></div>
+          </div>
+        </div>
+      </div>
+      <div class="step-two steps">
+        <div class="step">2.</div>
+        <div class="step-two-content step-content">
+          Save as Track #
+          <div id="track-selector"></div>
+        </div>
+      </div>
+      <div class="step-three steps">
+        <div class="step">3.</div>
+        <div class="step-content">
+          <img id="download-icon" class="download-icon disabled" src="assets/download.svg" alt="Download icon" />
+        </div>
+      </div>
     </div>
-    <div id="player">
-      <audio id="audio-player" controls></audio>
-      <div id="start" class="button" title="start/stop recording"></div>
+    <div class="instructions">
+      <div class="instructions-title">How to use</div>
+      <div class="instructions-content">
+        <div class="tips">
+          <p>NOTE: This tool is for creating <strong>ONE</strong> sound clip at a time.</p>
+          <p>1. <strong>Record your sound clip.</strong><br />Each time you click the record button the previous recording will be erased. If you make a mistake, you can just click record again and it will start over with a blank recording.</p>
+          <p>2. <strong>Choose the track #.</strong><br />The number corresponds to the pad on the Bare Conductive board. So track #0 will go with pad #0, track #1 will go with pad #1 and so on.</p>
+          <p>3. <strong>Download the recording.</strong><br />The recording will be saved to your computer to be copied over to the Bare Conductive sdcard.</p>
+          <p><strong>TIP:</strong> If you download multiple recordings of the same track #, you may have to delete the extra number in the filename.
+          <br /><i>e.g. TRACK001 <strong>(1)</strong>.mp3, you would delete the (1).</i></p>
+
+        </div>
+      </div>
     </div>
-    Save as Track #
-    <div id="track-selector"></div>
-    <div id="download" class="button disabled" title="download mp3"></div>
   </div>
 </body>
 </html>

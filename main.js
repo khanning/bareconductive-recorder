@@ -26,7 +26,7 @@ async function start() {
   player = document.getElementById('audio-player');
   startButton = document.getElementById('start');
   // stopButton = document.getElementById('stop');
-  downloadButton = document.getElementById('download');
+  downloadButton = document.getElementById('download-icon');
   statusContainer = document.getElementById('status');
   statusTag = document.getElementById('status-label');
   statusTicker = document.getElementById('status-counter');
@@ -51,7 +51,12 @@ async function start() {
   const stream = await navigator.mediaDevices.getUserMedia({audio: true, video: false})
   let AudioContext = window.AudioContext || window.webkitAudioContext;
   const audioContext = new AudioContext();
+  const analyzer = audioContext.createAnalyser();
+  analyzer.fftSize = 2048;
+  let buffer = new Uint8Array(analyzer.frequencyBinCount);
   let source = audioContext.createMediaStreamSource(stream);
+  console.log(source);
+  analyzer.connect(source);
   webAudioRecorder = new WebAudioRecorder(source, {
     workerDir: 'web-audio-recorder-js/lib-minified/',
     encoding: 'mp3',
@@ -86,6 +91,7 @@ function startRecording() {
     setTimeout(() => {
       webAudioRecorder.startRecording()
       ticker = setInterval(() => {
+        console.log(analyzer.getByteTimeDomainData(buffer));
         let time = (Date.now() - startTime) / 1000;
         statusTicker.innerHTML = `&nbsp;${time.toFixed(1)}s`;
       }, 50);
