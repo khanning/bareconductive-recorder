@@ -51,12 +51,7 @@ async function start() {
   const stream = await navigator.mediaDevices.getUserMedia({audio: true, video: false})
   let AudioContext = window.AudioContext || window.webkitAudioContext;
   const audioContext = new AudioContext();
-  const analyzer = audioContext.createAnalyser();
-  analyzer.fftSize = 2048;
-  let buffer = new Uint8Array(analyzer.frequencyBinCount);
   let source = audioContext.createMediaStreamSource(stream);
-  console.log(source);
-  analyzer.connect(source);
   webAudioRecorder = new WebAudioRecorder(source, {
     workerDir: 'web-audio-recorder-js/lib-minified/',
     encoding: 'mp3',
@@ -72,7 +67,7 @@ async function start() {
       player.src = e.target.result;
       statusContainer.className = '';
       statusTag.innerHTML = '&nbsp;';
-      downloadButton.className = 'button ready';
+      downloadButton.className = 'download-icon ready';
     }
     reader.readAsDataURL(blob);
   }
@@ -86,12 +81,11 @@ function startRecording() {
     statusTag.innerHTML = 'Recording';
     startTime = Date.now();
     statusTicker.innerHTML = '&nbsp;0.0s';
-    downloadButton.className = 'button disabled';
+    downloadButton.className = 'download-icon disabled';
     player.src = null;
     setTimeout(() => {
       webAudioRecorder.startRecording()
       ticker = setInterval(() => {
-        console.log(analyzer.getByteTimeDomainData(buffer));
         let time = (Date.now() - startTime) / 1000;
         statusTicker.innerHTML = `&nbsp;${time.toFixed(1)}s`;
       }, 50);
