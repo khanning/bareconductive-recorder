@@ -20,6 +20,7 @@ let selectorDivs = [];
 
 let ticker = null;
 let startTime = 0;
+let recordingTimeout = null;
 
 async function start() {
   trackSelector = document.getElementById('track-selector');
@@ -89,13 +90,14 @@ function startRecording() {
         let time = (Date.now() - startTime) / 1000;
         statusTicker.innerHTML = `&nbsp;${time.toFixed(1)}s`;
       }, 50);
-      setTimeout(stopRecording, 30000);
+      recordingTimeout = setTimeout(stopRecording, 30000);
     }, 150);
     recording = true;
   }
 }
 
 function stopRecording() {
+  clearTimeout(recordingTimeout);
   statusContainer.className = 'status-processing';
   statusTag.innerHTML = 'Processing';
   statusTicker.innerHTML = '';
