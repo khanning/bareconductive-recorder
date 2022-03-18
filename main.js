@@ -90,7 +90,7 @@ function startRecording() {
         let time = (Date.now() - startTime) / 1000;
         statusTicker.innerHTML = `&nbsp;${time.toFixed(1)}s`;
       }, 50);
-      recordingTimeout = setTimeout(stopRecording, 30000);
+      recordingTimeout = setTimeout(stopRecording, 60000);
     }, 150);
     recording = true;
   }
