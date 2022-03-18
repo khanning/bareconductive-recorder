@@ -131,10 +131,6 @@ html, body {
   cursor: default;
 }
 
-.ready {
-  background: url('assets/download.svg') no-repeat;
-}
-
 #status {
   display: flex;
   margin: 5px 0;

@@ -91,7 +91,6 @@ function startRecording() {
       }, 50);
       setTimeout(stopRecording, 30000);
     }, 150);
-    startButton.style.backgroundImage = 'url("assets/stop.svg")';
     recording = true;
   }
 }
